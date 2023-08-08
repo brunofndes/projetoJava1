@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Aluno {
+import cursojava.constantes.StatusAlunos;
 
-	String nome;
-	int idade;
-	String dataNascimento;
-	String registroGeral;
-	String numeroCpf;
-	String nomeMaeMae;
-	String nomePai;
+public  class Aluno extends Pessoa {
+
 	String dataMatricula;
 	String nomeEscola;
 	String serieMatriculado;
@@ -134,12 +129,12 @@ public class Aluno {
 		double media = this.getMedia();
 		if (media >= 50) {
 			if (media >= 70) {
-				return "Aluno Aprovado";
+				return StatusAlunos.APROVADO;
 			}else {
-				return "Aluno em recuperação";
+				return StatusAlunos.RECUPERACAO;
 			}
 		} else {
-			return "Aluno Reprovado";
+			return StatusAlunos.REPROVADO;
 		}
 	}
 

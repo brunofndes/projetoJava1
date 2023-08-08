@@ -1,19 +1,39 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import curso_projetojava.classes.Aluno;
+import curso_projetojava.classes.Diretor;
 import curso_projetojava.classes.Disciplina;
+import curso_projetojava.classes.Secretario;
+import cursojava.classesauxiliares.FuncaoAutenticar;
+import cursojava.constantes.StatusAlunos;
+import cursojava.interfaces.PermitirAcesso;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		String login = JOptionPane.showInputDialog("Informe o login");
+		String senha = JOptionPane.showInputDialog("Informe a senha");
+		
+		
+				
+		
+		if(new FuncaoAutenticar(new Diretor(login,senha)).autentitar()) {
+		
 		List<Aluno> alunos = new ArrayList<Aluno>();
+		
+		/*Lista mapeada contendo uma chave identificando os valores*/
+		HashMap<String, List<Aluno>> maps = new HashMap<String, List<Aluno>>();
+		
+		
 
-		for (int qtd = 1; qtd <= 2; qtd++) {
+		for (int qtd = 1; qtd <= 5; qtd++) {
 
 			String nome = JOptionPane.showInputDialog("Qual o nome do aluno " + qtd + " ?");
 			/*
@@ -60,36 +80,51 @@ public class Main {
 
 			alunos.add(aluno1);
 
-		}
-
-		for (Aluno aluno : alunos) {
-
-			if (aluno.getNome().equalsIgnoreCase("bruno")) {
-				alunos.remove(aluno);
-				break;
-
-			} else {
-				System.out.println(aluno);
-				System.out.println(aluno.getNome());
-				System.out.println("Media do aluno = " + aluno.getMedia());
-				System.out.println("Resultado = " + (aluno.getAprovacao()));
-				System.out.println("-------------------------------------------------------------------------");
-
-			}
-
-		}
-
-		for (Aluno aluno : alunos) {
-			System.out.println("Alunos que sobraram na lista");
-			System.out.println(aluno.getNome());
-			System.out.println("Suas materias são:");
 			
-			for (Disciplina disciplina : aluno.getDisciplinas()) {
-				System.out.println(disciplina.getDisciplina());
-				
-			}
 		}
+		
+		maps.put(StatusAlunos.APROVADO, new ArrayList<Aluno>());
+		maps.put(StatusAlunos.REPROVADO, new ArrayList<Aluno>());
+		maps.put(StatusAlunos.RECUPERACAO, new ArrayList<Aluno>());
+		
+		
+		/*Adicionando os alunos aprovados, reprovados e recuperação nas listas*/
+		for (Aluno aluno : alunos) {
+			
+			if(aluno.getAprovacao().equalsIgnoreCase(StatusAlunos.APROVADO)) {
+				maps.get(StatusAlunos.APROVADO).add(aluno);
+			}else			
+			if(aluno.getAprovacao().equalsIgnoreCase(StatusAlunos.REPROVADO)) {
+				maps.get(StatusAlunos.REPROVADO).add(aluno);
+			}else			
+			if(aluno.getAprovacao().equalsIgnoreCase(StatusAlunos.RECUPERACAO)) {
+				maps.get(StatusAlunos.RECUPERACAO).add(aluno);
+			}
+			
+		}
+		
+		System.out.println("-----------------Lista dos Aprovados-----------------");
+		for (Aluno aluno : maps.get(StatusAlunos.APROVADO)) {
+			System.out.println(aluno.getNome() + " Resultado = " + aluno.getAprovacao() + " com média de = " + aluno.getMedia());
+		}
+		
+		System.out.println("-----------------Lista dos Reprovados-----------------");
+		for (Aluno aluno : maps.get(StatusAlunos.REPROVADO)) {
+			System.out.println(aluno.getNome() + " Resultado = " + aluno.getAprovacao() + " com média de = " + aluno.getMedia());
+		}
+		
+		System.out.println("-----------------Lista dos Recuperação-----------------");
+		for (Aluno aluno : maps.get(StatusAlunos.RECUPERACAO)) {
+			System.out.println(aluno.getNome() + " Resultado = " + aluno.getAprovacao() + " com média de = " + aluno.getMedia());
+		}
+		
 
+		
+
+		}else {
+			JOptionPane.showMessageDialog(null, "Login não permitido");
+		}
+		
 	}
 
 }
