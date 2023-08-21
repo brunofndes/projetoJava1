@@ -29,7 +29,7 @@ public class Arquivos {
 		pessoaList.add(pessoa2);
 		pessoaList.add(pessoa3);
 		
-		File arquivo = new File("C:\\Users\\bruno\\git\\repository\\curso_projetojava\\src\\cursojava\\arquivos\\arquivo.txt");
+		File arquivo = new File("C:\\Users\\bruno\\git\\repository\\curso_projetojava\\src\\cursojava\\arquivos\\arquivo.csv");
 		
 		if(!arquivo.exists()) {
 			arquivo.createNewFile();
@@ -38,7 +38,7 @@ public class Arquivos {
 		FileWriter escrever_no_arquivo = new FileWriter(arquivo);
 		
 		for (Pessoas p : pessoaList) {
-			escrever_no_arquivo.write(p.getNome() + " " + p.getEmail() + " " + p.getIdade() + "\n");
+			escrever_no_arquivo.write(p.getNome() + ";" + p.getEmail() + ";" + p.getIdade() + "\n");
 		}
 		
 		escrever_no_arquivo.flush();
