@@ -1,5 +1,6 @@
 package cursojava.arquivos;
 
+import java.lang.reflect.Constructor;
 import java.util.Objects;
 
 public class Pessoas {
@@ -7,6 +8,10 @@ public class Pessoas {
 	private String email;
 	private String nome;
 	private int idade;
+	
+	public Pessoas() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public String getEmail() {
 		return email;
